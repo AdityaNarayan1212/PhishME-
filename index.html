@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+    PRIVACY SAFEGUARD: this rule tells the browser to refuse ALL network
+    connections, images, fonts and outside scripts. Even if code tried to
+    send your email somewhere, the browser would block it. Only this
+    project's own style.css, script.js and samples.js may load.
+  -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src data:; connect-src 'none'; font-src 'none'; form-action 'none'; base-uri 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Phishing Email Analyser</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#input-title">Skip to the email box</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <svg class="brand-mark" viewBox="0 0 32 32" width="40" height="40" aria-hidden="true" focusable="false">
+        <rect x="2" y="6" width="28" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M3 8l13 10L29 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="24" cy="23" r="5" fill="#FFFFFF" stroke="currentColor" stroke-width="2"/>
+        <path d="M27.5 26.5L30 29" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h1>Phishing Email Analyser</h1>
+        <p class="tagline">An educational field guide for spotting warning signs in suspicious emails.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section class="privacy" aria-labelledby="privacy-title">
+      <svg class="privacy-icon" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false">
+        <path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5l8-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M8.5 12l2.5 2.5L15.5 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div>
+        <h2 id="privacy-title" class="visually-hidden">Privacy notice</h2>
+        <p class="privacy-main"><strong>Privacy first:</strong> Your email is analysed locally in your browser. Its contents are not uploaded to a server or sent to an AI service by this application.</p>
+        <p class="privacy-sub">You should still avoid pasting sensitive personal information into any tool unless you understand the environment it is running in (your device, your browser, and any extensions you have installed).</p>
+      </div>
+    </section>
+
+    <ol class="steps" aria-label="How to use this tool">
+      <li><span class="step-num" aria-hidden="true">1</span> Paste an email</li>
+      <li><span class="step-num" aria-hidden="true">2</span> Click Analyse</li>
+      <li><span class="step-num" aria-hidden="true">3</span> Learn what stood out</li>
+    </ol>
+
+    <section class="card" aria-labelledby="input-title">
+      <h2 id="input-title">Paste the suspicious email</h2>
+      <p class="hint">Paste the message text here. If you can, include the email headers too (the lines at the top such as <code>From:</code>, <code>Reply-To:</code> and <code>Authentication-Results:</code>). Headers allow extra checks; without them those checks are simply skipped.</p>
+
+      <label class="visually-hidden" for="email-input">Email contents to analyse</label>
+      <textarea id="email-input" rows="12" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Paste the full text of the email here, or choose a sample below..."></textarea>
+
+      <div class="actions">
+        <button type="button" id="analyse-btn" class="btn btn-primary">Analyse Email</button>
+        <button type="button" id="clear-btn" class="btn btn-secondary">Clear</button>
+        <span id="input-status" class="status" role="status" aria-live="polite"></span>
+      </div>
+
+      <p class="warn-inline"><strong>Never click a suspicious link or open an attachment merely to test whether it is malicious.</strong></p>
+
+      <details class="how-headers">
+        <summary>How do I find an email's headers?</summary>
+        <p>In Gmail: open the message, choose the three-dot menu, then <em>Show original</em>. In Outlook on the web: open the message, choose the three-dot menu, then <em>View message source</em>. In Outlook for Windows: open the message, choose <em>File</em>, then <em>Properties</em>. Copy the header text, paste it into the box above the email body, and leave one blank line in between.</p>
+      </details>
+    </section>
+
+    <section class="card" aria-labelledby="samples-title">
+      <h2 id="samples-title">Try Sample Emails</h2>
+      <p class="hint">These six emails are completely fictional. They use only reserved example domains and contain no working links. Choose one to load it into the box above, then click <strong>Analyse Email</strong>.</p>
+      <div id="sample-list" class="sample-grid"></div>
+      <div id="sample-info" class="sample-info" aria-live="polite"></div>
+    </section>
+
+    <!-- Results are built by script.js and placed here -->
+    <section id="results" class="results" aria-labelledby="results-title" hidden></section>
+
+    <section class="disclaimer" aria-labelledby="disclaimer-title">
+      <h2 id="disclaimer-title">Please read before relying on a result</h2>
+      <p><strong>This educational triage tool identifies patterns commonly associated with phishing and social engineering. It cannot prove that an email is malicious or safe. False positives and false negatives are possible. Verify important messages independently through official websites, applications, or known contact information.</strong></p>
+      <p>This tool never visits links, never opens attachments, and never contacts any server. It only reads the text you paste, in your browser, and forgets it as soon as you clear the page or close the tab.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Phishing Email Analyser - a learning project. Static files only: no accounts, no tracking, no storage of what you paste.</p>
+    </div>
+  </footer>
+
+  <script src="samples.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
